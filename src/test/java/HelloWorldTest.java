@@ -8,7 +8,7 @@ public class HelloWorldTest {
         //given
         String expected = "Hello World!";
 
-        //hen
+        //when
         String actual = HelloWorld.greeting();
 
         //then
