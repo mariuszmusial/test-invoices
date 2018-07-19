@@ -1,20 +1,20 @@
 package pl.coderstrust.project;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class HelloWorldTest {
 
-    @Test
-    public void shouldPrintGreeting() {
-        //given
-        String expected = "Hello World!";
+  @Test
+  public void shouldPrintGreeting() {
+    //given
+    String expected = "Hello World!";
 
-        //when
-        String actual = HelloWorld.greeting();
+    //when
+    String actual = HelloWorld.greeting();
 
-        //then
-        assertEquals(expected,actual);
-    }
+    //then
+    assertEquals(expected, actual);
+  }
 }
