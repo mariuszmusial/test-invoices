@@ -2,7 +2,6 @@
 .idea
 *.DS_Store
 *.md
-*.xml
 
 # Compiled class file
 *.class
