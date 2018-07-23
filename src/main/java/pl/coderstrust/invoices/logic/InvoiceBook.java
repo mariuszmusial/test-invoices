@@ -6,7 +6,7 @@ import java.util.List;
 
 public class InvoiceBook {
 
-  private List<Invoice> invoices; //should be changed after adding the InMemoryDataBase class
+  private List<Invoice> invoices;
 
   public void saveInvoice(Invoice invoice) {
     invoices.add(invoice);

@@ -5,7 +5,12 @@ import java.util.Objects;
 public class Company {
 
   private String name;
-  private String taxIdentyficationNumber;
+  private String taxID;
+
+  public Company(String name, String taxID) {
+    this.name = name;
+    this.taxID = taxID;
+  }
 
   public String getName() {
     return name;
@@ -15,12 +20,12 @@ public class Company {
     this.name = name;
   }
 
-  public String getTaxIdentyficationNumber() {
-    return taxIdentyficationNumber;
+  public String getTaxID() {
+    return taxID;
   }
 
-  public void setTaxIdentyficationNumber(String taxIdentyficationNumber) {
-    this.taxIdentyficationNumber = taxIdentyficationNumber;
+  public void setTaxID(String taxID) {
+    this.taxID = taxID;
   }
 
   @Override
@@ -33,20 +38,20 @@ public class Company {
     }
     Company company = (Company) o;
     return Objects.equals(getName(), company.getName()) &&
-        Objects.equals(getTaxIdentyficationNumber(), company.getTaxIdentyficationNumber());
+        Objects.equals(getTaxID(), company.getTaxID());
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(getName(), getTaxIdentyficationNumber());
+    return Objects.hash(getName(), getTaxID());
   }
 
   @Override
   public String toString() {
     return "Company{"
         + "name='" + name + '\''
-        + ", taxIdentyficationNumber='" + taxIdentyficationNumber + '\''
+        + ", taxID='" + taxID + '\''
         + '}';
   }
 }

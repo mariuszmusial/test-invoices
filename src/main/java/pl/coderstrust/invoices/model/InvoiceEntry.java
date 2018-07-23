@@ -67,7 +67,6 @@ public class InvoiceEntry {
 
   @Override
   public int hashCode() {
-
     return Objects.hash(getProductName(), getAmount(), getPrice(), getVat());
   }
 }

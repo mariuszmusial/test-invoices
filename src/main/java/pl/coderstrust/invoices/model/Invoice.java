@@ -7,8 +7,8 @@ import java.util.Objects;
 public class Invoice {
 
   private String id;
-  private LocalDate issueData;
-  private Company sellect;
+  private LocalDate issuedData;
+  private Company seller;
   private Company bayer;
 
   private List<InvoiceEntry> entries;
@@ -16,8 +16,8 @@ public class Invoice {
   public Invoice(String id, LocalDate issueData, Company sellect,
       Company bayer, List<InvoiceEntry> entries) {
     this.id = id;
-    this.issueData = issueData;
-    this.sellect = sellect;
+    this.issuedData = issueData;
+    this.seller = sellect;
     this.bayer = bayer;
     this.entries = entries;
   }
@@ -27,11 +27,11 @@ public class Invoice {
   }
 
   public LocalDate getIssueData() {
-    return issueData;
+    return issuedData;
   }
 
   public Company getSellect() {
-    return sellect;
+    return seller;
   }
 
   public Company getBayer() {
@@ -60,18 +60,6 @@ public class Invoice {
 
   @Override
   public int hashCode() {
-
     return Objects.hash(getId(), getIssueData(), getSellect(), getBayer(), getEntries());
-  }
-
-  @Override
-  public String toString() {
-    return "Invoice{"
-        + "id='" + id + '\''
-        + ", issueData=" + issueData
-        + ", sellect=" + sellect
-        + ", bayer=" + bayer
-        + ", entries=" + entries
-        + '}';
   }
 }
