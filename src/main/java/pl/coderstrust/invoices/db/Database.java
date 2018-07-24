@@ -9,4 +9,8 @@ public interface Database {
   void saveInvoice(Invoice invoice);
 
   List<Invoice> getInvoices();
+
+  void updateInvoices(Invoice invoice);
+
+  void removeInvoicesById(int id);
 }

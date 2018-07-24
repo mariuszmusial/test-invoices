@@ -12,7 +12,7 @@ public class Invoice {
   private Company buyer;
 
   private List<InvoiceEntry> entries;
-  
+
   public Invoice(String id, LocalDate issueData, Company seller,
       Company buyer, List<InvoiceEntry> entries) {
     this.id = id;
