@@ -46,12 +46,4 @@ public class Company {
 
     return Objects.hash(getName(), getTaxID());
   }
-
-  @Override
-  public String toString() {
-    return "Company{"
-        + "name='" + name + '\''
-        + ", taxID='" + taxID + '\''
-        + '}';
-  }
 }

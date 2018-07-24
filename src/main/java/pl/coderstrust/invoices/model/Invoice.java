@@ -9,16 +9,16 @@ public class Invoice {
   private String id;
   private LocalDate issuedData;
   private Company seller;
-  private Company bayer;
+  private Company buyer;
 
   private List<InvoiceEntry> entries;
-
-  public Invoice(String id, LocalDate issueData, Company sellect,
-      Company bayer, List<InvoiceEntry> entries) {
+  
+  public Invoice(String id, LocalDate issueData, Company seller,
+      Company buyer, List<InvoiceEntry> entries) {
     this.id = id;
     this.issuedData = issueData;
-    this.seller = sellect;
-    this.bayer = bayer;
+    this.seller = seller;
+    this.buyer = buyer;
     this.entries = entries;
   }
 
@@ -30,12 +30,12 @@ public class Invoice {
     return issuedData;
   }
 
-  public Company getSellect() {
+  public Company getSeller() {
     return seller;
   }
 
-  public Company getBayer() {
-    return bayer;
+  public Company getBuyer() {
+    return buyer;
   }
 
   public List<InvoiceEntry> getEntries() {
@@ -53,13 +53,13 @@ public class Invoice {
     Invoice invoice = (Invoice) o;
     return Objects.equals(getId(), invoice.getId()) &&
         Objects.equals(getIssueData(), invoice.getIssueData()) &&
-        Objects.equals(getSellect(), invoice.getSellect()) &&
-        Objects.equals(getBayer(), invoice.getBayer()) &&
+        Objects.equals(getSeller(), invoice.getSeller()) &&
+        Objects.equals(getBuyer(), invoice.getBuyer()) &&
         Objects.equals(getEntries(), invoice.getEntries());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getIssueData(), getSellect(), getBayer(), getEntries());
+    return Objects.hash(getId(), getIssueData(), getSeller(), getBuyer(), getEntries());
   }
 }
