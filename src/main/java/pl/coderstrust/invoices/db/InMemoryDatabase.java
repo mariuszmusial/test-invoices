@@ -11,8 +11,11 @@ public class InMemoryDatabase implements Database {
   private final Map<Integer, Invoice> invoices = new HashMap<>();
 
   @Override
-  public void saveInvoice(Invoice invoice) {
+  public void get(int id) {
+  }
 
+  @Override
+  public void saveInvoice(Invoice invoice) {
   }
 
   @Override
@@ -21,12 +24,10 @@ public class InMemoryDatabase implements Database {
   }
 
   @Override
-  public void updateInvoices(Invoice invoice) {
-
+  public void update(Invoice invoice) {
   }
 
   @Override
-  public void removeInvoicesById(int id) {
-
+  public void remove(int id) {
   }
 }
