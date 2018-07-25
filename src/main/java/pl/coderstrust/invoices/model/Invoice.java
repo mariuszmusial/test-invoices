@@ -6,28 +6,33 @@ import java.util.Objects;
 
 public class Invoice {
 
-  private String id;
-  private LocalDate issuedData;
+  private Long id;
+
+  private String identifier;
+  private LocalDate issuedDate;
   private Company seller;
   private Company buyer;
-
   private List<InvoiceEntry> entries;
 
-  public Invoice(String id, LocalDate issueData, Company seller,
+  public Invoice(Long id, LocalDate issueDate, Company seller,
       Company buyer, List<InvoiceEntry> entries) {
     this.id = id;
-    this.issuedData = issueData;
+    this.issuedDate = issueDate;
     this.seller = seller;
     this.buyer = buyer;
     this.entries = entries;
   }
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public LocalDate getIssueData() {
-    return issuedData;
+  public String getIdentifier() {
+    return identifier;
+  }
+
+  public LocalDate getIssuedDate() {
+    return issuedDate;
   }
 
   public Company getSeller() {
@@ -52,7 +57,7 @@ public class Invoice {
     }
     Invoice invoice = (Invoice) o;
     return Objects.equals(getId(), invoice.getId()) &&
-        Objects.equals(getIssueData(), invoice.getIssueData()) &&
+        Objects.equals(getIssuedDate(), invoice.getIssuedDate()) &&
         Objects.equals(getSeller(), invoice.getSeller()) &&
         Objects.equals(getBuyer(), invoice.getBuyer()) &&
         Objects.equals(getEntries(), invoice.getEntries());
@@ -60,6 +65,6 @@ public class Invoice {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getIssueData(), getSeller(), getBuyer(), getEntries());
+    return Objects.hash(getId(), getIssuedDate(), getSeller(), getBuyer(), getEntries());
   }
 }

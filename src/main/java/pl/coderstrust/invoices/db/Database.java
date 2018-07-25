@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface Database {
 
-  void get(int id);
+  Long saveInvoice(Invoice invoice);
 
-  void saveInvoice(Invoice invoice);
+  Invoice getInvoiceById(long id);
+
+  void updateInvoice(Invoice invoice);
 
   List<Invoice> getInvoices();
 
-  void update(Invoice invoice);
-
-  void remove(int id);
+  void removeInvoice(long id);
 }
