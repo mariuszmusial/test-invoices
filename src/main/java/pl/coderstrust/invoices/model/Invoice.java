@@ -14,10 +14,12 @@ public class Invoice {
   private Company buyer;
   private List<InvoiceEntry> entries;
 
-  public Invoice(Long id, LocalDate issueDate, Company seller,
-      Company buyer, List<InvoiceEntry> entries) {
+  public Invoice(Long id, String identifier, LocalDate issuedDate,
+      Company seller, Company buyer,
+      List<InvoiceEntry> entries) {
     this.id = id;
-    this.issuedDate = issueDate;
+    this.identifier = identifier;
+    this.issuedDate = issuedDate;
     this.seller = seller;
     this.buyer = buyer;
     this.entries = entries;
@@ -57,6 +59,7 @@ public class Invoice {
     }
     Invoice invoice = (Invoice) o;
     return Objects.equals(getId(), invoice.getId()) &&
+        Objects.equals(getIdentifier(), invoice.getIdentifier()) &&
         Objects.equals(getIssuedDate(), invoice.getIssuedDate()) &&
         Objects.equals(getSeller(), invoice.getSeller()) &&
         Objects.equals(getBuyer(), invoice.getBuyer()) &&
@@ -65,6 +68,8 @@ public class Invoice {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getIssuedDate(), getSeller(), getBuyer(), getEntries());
+
+    return Objects
+        .hash(getId(), getIdentifier(), getIssuedDate(), getSeller(), getBuyer(), getEntries());
   }
 }

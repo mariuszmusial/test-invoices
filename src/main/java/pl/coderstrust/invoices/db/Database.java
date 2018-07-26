@@ -1,18 +1,20 @@
 package pl.coderstrust.invoices.db;
 
+import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.model.Invoice;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Database {
 
-  Long saveInvoice(Invoice invoice);
+  Long saveInvoice(Invoice invoice) throws DatabaseException;
 
-  Invoice getInvoiceById(long id);
+  Optional<Invoice> getInvoiceById(long id);
 
-  void updateInvoice(Invoice invoice);
+  int updateInvoice(Invoice invoice) throws DatabaseException;
 
   List<Invoice> getInvoices();
 
-  void removeInvoice(long id);
+  void removeInvoice(long id) throws DatabaseException;
 }
