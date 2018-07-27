@@ -7,7 +7,7 @@ public enum Vat {
   VAT_5(0.05),
   VAT_0(0.00);
 
-  private final double vatPercent;
+  private double vatPercent;
 
   Vat(double vatPercent) {
     this.vatPercent = vatPercent;
