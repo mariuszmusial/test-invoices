@@ -33,8 +33,7 @@ public class InvoiceBook {
     return database.updateInvoice(invoice);
   }
 
-  public List<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
-      throws DatabaseException {
+  public List<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 

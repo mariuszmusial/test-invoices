@@ -18,10 +18,7 @@ public interface Database {
 
   int updateInvoice(Invoice invoice) throws DatabaseException;
 
-  List<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
-      throws DatabaseException;
+  List<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate);
 
   void deleteInvoice(Long id) throws DatabaseException;
-
-
 }
