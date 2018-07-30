@@ -22,32 +22,16 @@ public class InvoiceEntry {
     return productName;
   }
 
-  public void setProductName(String productName) {
-    this.productName = productName;
-  }
-
   public String getAmount() {
     return amount;
-  }
-
-  public void setAmount(String amount) {
-    this.amount = amount;
   }
 
   public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
-
   public Vat getVat() {
     return vat;
-  }
-
-  public void setVat(Vat vat) {
-    this.vat = vat;
   }
 
   @Override

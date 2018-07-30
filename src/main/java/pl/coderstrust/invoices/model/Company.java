@@ -23,40 +23,20 @@ public class Company {
     return name;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public String getTaxIdentificationNumber() {
     return taxIdentificationNumber;
-  }
-
-  public void setTaxIdentificationNumber(String taxIdentificationNumber) {
-    this.taxIdentificationNumber = taxIdentificationNumber;
   }
 
   public String getStreetAddress() {
     return streetAddress;
   }
 
-  public void setStreetAddress(String streetAddress) {
-    this.streetAddress = streetAddress;
-  }
-
   public String getPostalCode() {
     return postalCode;
   }
 
-  public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
-  }
-
   public String getCity() {
     return city;
-  }
-
-  public void setCity(String city) {
-    this.city = city;
   }
 
   @Override
