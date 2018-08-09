@@ -1,13 +1,13 @@
 package pl.coderstrust.invoices.logic;
 
-import pl.coderstrust.invoices.db.Database;
-import pl.coderstrust.invoices.exception.DatabaseException;
-import pl.coderstrust.invoices.model.Invoice;
-
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import pl.coderstrust.invoices.db.Database;
+import pl.coderstrust.invoices.exception.DatabaseException;
+import pl.coderstrust.invoices.model.Invoice;
 
 public class InvoiceBook {
 
@@ -37,7 +37,7 @@ public class InvoiceBook {
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 
-  public void deleteInvoice(Long id) throws DatabaseException {
+  public void deleteInvoice(Long id) throws DatabaseException, IOException {
     database.deleteInvoice(id);
   }
 }
