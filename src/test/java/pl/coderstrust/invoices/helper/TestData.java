@@ -50,6 +50,5 @@ public class TestData {
   private static Company sampleCompany() {
     return new Company("company", "767-294-43-78",
         "Królewska 25", "30-440", "Warszawa");
-
   }
 }
