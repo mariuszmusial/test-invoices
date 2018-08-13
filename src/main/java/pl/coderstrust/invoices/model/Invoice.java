@@ -14,6 +14,10 @@ public class Invoice {
   private Company buyer;
   private List<InvoiceEntry> entries;
 
+  public Invoice() {
+    //constructor for use only by Jackson
+  }
+
   public Invoice(Long id, String identifier, LocalDate issuedDate,
       Company seller, Company buyer,
       List<InvoiceEntry> entries) {

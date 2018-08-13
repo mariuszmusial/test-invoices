@@ -6,11 +6,15 @@ import java.util.Objects;
 public class InvoiceEntry {
 
   private String productName;
-  private String amount;
+  private Integer amount;
   private BigDecimal price;
   private Vat vat;
 
-  public InvoiceEntry(String productName, String amount, BigDecimal price,
+  public InvoiceEntry() {
+    //constructor for use only by Jackson
+  }
+
+  public InvoiceEntry(String productName, Integer amount, BigDecimal price,
       Vat vat) {
     this.productName = productName;
     this.amount = amount;
@@ -22,7 +26,7 @@ public class InvoiceEntry {
     return productName;
   }
 
-  public String getAmount() {
+  public Integer getAmount() {
     return amount;
   }
 

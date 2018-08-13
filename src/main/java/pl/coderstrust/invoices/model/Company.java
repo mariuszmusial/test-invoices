@@ -10,6 +10,10 @@ public class Company {
   private String postalCode;
   private String city;
 
+  public Company() {
+    //constructor for use only by Jackson
+  }
+
   public Company(String name, String taxIdentificationNumber, String streetAddress,
       String postalCode, String city) {
     this.name = name;
