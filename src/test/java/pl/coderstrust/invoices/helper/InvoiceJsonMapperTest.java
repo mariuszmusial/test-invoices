@@ -53,7 +53,7 @@ public class InvoiceJsonMapperTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowExceptionWhenPassedNullJSON() throws IOException {
+  public void shouldThrowExceptionWhenPassedNullJson() throws IOException {
     InvoiceJsonMapper.fromJson(null);
   }
 

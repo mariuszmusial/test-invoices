@@ -39,18 +39,18 @@ public class InvoiceEntry {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) {
+  public boolean equals(Object obj) {
+    if (this == obj) {
       return true;
     }
-    if (!(o instanceof InvoiceEntry)) {
+    if (!(obj instanceof InvoiceEntry)) {
       return false;
     }
-    InvoiceEntry that = (InvoiceEntry) o;
-    return Objects.equals(getProductName(), that.getProductName()) &&
-        Objects.equals(getAmount(), that.getAmount()) &&
-        Objects.equals(getPrice(), that.getPrice()) &&
-        getVat() == that.getVat();
+    InvoiceEntry that = (InvoiceEntry) obj;
+    return Objects.equals(getProductName(), that.getProductName())
+        && Objects.equals(getAmount(), that.getAmount())
+        && Objects.equals(getPrice(), that.getPrice())
+        && getVat() == that.getVat();
   }
 
   @Override

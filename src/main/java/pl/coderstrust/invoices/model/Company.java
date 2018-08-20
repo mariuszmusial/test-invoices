@@ -44,19 +44,19 @@ public class Company {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) {
+  public boolean equals(Object obj) {
+    if (this == obj) {
       return true;
     }
-    if (!(o instanceof Company)) {
+    if (!(obj instanceof Company)) {
       return false;
     }
-    Company company = (Company) o;
-    return Objects.equals(getName(), company.getName()) &&
-        Objects.equals(getTaxIdentificationNumber(), company.getTaxIdentificationNumber()) &&
-        Objects.equals(getStreetAddress(), company.getStreetAddress()) &&
-        Objects.equals(getPostalCode(), company.getPostalCode()) &&
-        Objects.equals(getCity(), company.getCity());
+    Company company = (Company) obj;
+    return Objects.equals(getName(), company.getName())
+        && Objects.equals(getTaxIdentificationNumber(), company.getTaxIdentificationNumber())
+        && Objects.equals(getStreetAddress(), company.getStreetAddress())
+        && Objects.equals(getPostalCode(), company.getPostalCode())
+        && Objects.equals(getCity(), company.getCity());
   }
 
   @Override
