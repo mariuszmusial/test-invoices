@@ -1,18 +1,19 @@
 package pl.coderstrust.invoices.helper;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.coderstrust.invoices.model.Invoice;
 
-public class InvoiceJsonMapperTest {
+class InvoiceJsonMapperTest {
 
   @Test
-  public void shouldConvertEmptyInvoiceToJson() throws JsonProcessingException {
+  void shouldConvertEmptyInvoiceToJson() throws JsonProcessingException {
     //given
     Invoice invoice = TestData.emptyInvoice();
 
@@ -24,7 +25,7 @@ public class InvoiceJsonMapperTest {
   }
 
   @Test
-  public void shouldConvertInvoiceWithEverythingToJson() throws JsonProcessingException {
+  void shouldConvertInvoiceWithEverythingToJson() throws JsonProcessingException {
     //given
     Invoice invoice = TestData.sampleInvoice();
 
@@ -35,13 +36,13 @@ public class InvoiceJsonMapperTest {
     assertThat(result, is(TestData.sampleInvoiceAsString()));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowExceptionWhenPassedNullInvoice() throws JsonProcessingException {
-    InvoiceJsonMapper.toJson(null);
+  @Test
+  void shouldThrowExceptionWhenPassedNullInvoice() {
+    assertThrows(IllegalArgumentException.class, () -> InvoiceJsonMapper.toJson(null));
   }
 
   @Test
-  public void shouldConvertJsonWithEverythingToInvoice() throws IOException {
+  void shouldConvertJsonWithEverythingToInvoice() throws IOException {
     //given
     String json = TestData.sampleInvoiceAsString();
 
@@ -52,13 +53,13 @@ public class InvoiceJsonMapperTest {
     assertThat(result, is(TestData.sampleInvoice()));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowExceptionWhenPassedNullJson() throws IOException {
-    InvoiceJsonMapper.fromJson(null);
+  @Test
+  void shouldThrowExceptionWhenPassedNullJson() {
+    assertThrows(IllegalArgumentException.class, () -> InvoiceJsonMapper.fromJson(null));
   }
 
-  @Test(expected = JsonParseException.class)
-  public void shouldThrowExceptionWhenPassedRandomString() throws IOException {
-    InvoiceJsonMapper.fromJson("tererbnfjd ff r");
+  @Test
+  void shouldThrowExceptionWhenPassedRandomString() {
+    assertThrows(JsonParseException.class, () -> InvoiceJsonMapper.fromJson("tererbnfjd ff r"));
   }
 }
