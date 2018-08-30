@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import pl.coderstrust.invoices.model.InvoiceEntry;
 
-public class InvoiceEntryValidator {
+public class InvoiceEntryValidator implements Validator<InvoiceEntry> {
 
   private static final String EXPECTED_CORRECT_AMOUNT = "Expected correct amount (1 or more)";
   private static final String EXPECTED_NOT_EMPTY_PRODUCT_NAME = "Expected not empty product name";

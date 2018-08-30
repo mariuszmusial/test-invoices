@@ -29,8 +29,7 @@ class InvoiceEntryValidatorTest {
   void shouldValidateCorrectInvoiceEntry() {
     InvoiceEntry testInvoiceEntry = new InvoiceEntry("A product", 1, BigDecimal.TEN, Vat.VAT_5);
 
-    Collection<String> result = invoiceEntryValidator
-        .validate(testInvoiceEntry);
+    Collection<String> result = invoiceEntryValidator.validate(testInvoiceEntry);
 
     assertNotNull(result);
     assertEquals(0, result.size());
@@ -42,8 +41,7 @@ class InvoiceEntryValidatorTest {
   void shouldValidateIncorrectInvoiceEntries(InvoiceEntry invoiceEntry,
       int expectedExceptionsCount, String expectedMessageContains) {
 
-    Collection<String> result = invoiceEntryValidator
-        .validate(invoiceEntry);
+    Collection<String> result = invoiceEntryValidator.validate(invoiceEntry);
 
     assertNotNull(result);
     assertEquals(expectedExceptionsCount, result.size());
