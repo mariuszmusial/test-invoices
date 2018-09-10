@@ -24,11 +24,11 @@ public class InvoiceBook {
     return database.saveInvoice(invoice);
   }
 
-  public Collection<Invoice> getInvoices() {
+  public Collection<Invoice> getInvoices() throws DatabaseException {
     return database.getInvoices();
   }
 
-  public Optional<Invoice> getInvoiceById(Long id) {
+  public Optional<Invoice> getInvoiceById(Long id) throws DatabaseException, IOException {
     return database.getInvoiceById(id);
   }
 

@@ -27,12 +27,29 @@ public class FileHelper {
   }
 
   public static void writeLineToFile(File file, String line) {
-    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-      bufferedWriter.write(line);
-      bufferedWriter.newLine();
-      bufferedWriter.flush();
+    writeLineToFile(file, line, false);
+  }
+
+  public static void writeLineToFile(File file, String line, boolean overwrite) {
+    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, !overwrite))) {
+      writeLine(bufferedWriter, line);
     } catch (IOException ex) {
       throw new RuntimeException(ex);
     }
+  }
+
+  public static void writeLinesToFile(File file, List<String> lines) {
+    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false))) {
+      for (String line : lines) {
+        writeLine(bufferedWriter, line);
+      }
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  private static void writeLine(BufferedWriter bufferedWriter, String line) throws IOException {
+    bufferedWriter.write(line);
+    bufferedWriter.newLine();
   }
 }
