@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import pl.coderstrust.invoices.model.Company;
 
-public class CompanyValidator {    // implements Validator<Company>
+public class CompanyValidator implements Validator<Company> {
 
   private static final String EXPECTED_NOT_EMPTY_NAME = "Expected not empty name";
   private static final String EXPECTED_NOT_EMPTY_TAX_IDENTIFICATION_NUMBER = "Expected not empty tax ID";
