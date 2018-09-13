@@ -41,26 +41,25 @@ public class CompanyValidator implements Validator<Company> {
     if (company.getTaxIdentificationNumber() == null || company.getTaxIdentificationNumber()
         .isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_TAX_IDENTIFICATION_NUMBER);
-    }
-    if (company.getTaxIdentificationNumber() == null || company.getTaxIdentificationNumber()
-        .isEmpty()) {
-      validationExceptions.add(INVALID_IDENTIFICATION_NUMBER);
-    }
-    if (!taxIdPattern.matcher(company.getTaxIdentificationNumber()).matches()) {
-      validationExceptions
-          .add(INVALID_IDENTIFICATION_NUMBER + ": " + company.getTaxIdentificationNumber());
+    } else {
+      if (!taxIdPattern.matcher(company.getTaxIdentificationNumber()).matches()) {
+        validationExceptions
+            .add(INVALID_IDENTIFICATION_NUMBER + ": " + company.getTaxIdentificationNumber());
+      }
     }
     if (company.getStreetAddress() == null || company.getStreetAddress().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_STREET_ADDRESS);
-    }
-    if (!addressPattern.matcher(company.getStreetAddress()).matches()) {
-      validationExceptions.add(INVALID_ADDRESS + ": " + company.getStreetAddress());
+    } else {
+      if (!addressPattern.matcher(company.getStreetAddress()).matches()) {
+        validationExceptions.add(INVALID_ADDRESS + ": " + company.getStreetAddress());
+      }
     }
     if (company.getPostalCode() == null || company.getPostalCode().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_POSTAL_CODE);
-    }
-    if (!postalCodePattern.matcher(company.getPostalCode()).matches()) {
-      validationExceptions.add(INVALID_POSTAL_CODE + ": " + company.getPostalCode());
+    } else {
+      if (!postalCodePattern.matcher(company.getPostalCode()).matches()) {
+        validationExceptions.add(INVALID_POSTAL_CODE + ": " + company.getPostalCode());
+      }
     }
     if (company.getCity() == null || company.getCity().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_CITY);
