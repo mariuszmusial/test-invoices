@@ -38,8 +38,8 @@ public class CompanyValidator implements Validator<Company> {
     if (company.getName() == null || company.getName().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_NAME);
     }
-    if (company.getTaxIdentificationNumber() == null || company.getTaxIdentificationNumber()
-        .isEmpty()) {
+    if (company.getTaxIdentificationNumber() == null ||
+        company.getTaxIdentificationNumber().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_TAX_IDENTIFICATION_NUMBER);
     } else {
       if (!taxIdPattern.matcher(company.getTaxIdentificationNumber()).matches()) {
