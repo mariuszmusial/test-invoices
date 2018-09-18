@@ -3,7 +3,6 @@ package pl.coderstrust.invoices.logic;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import pl.coderstrust.invoices.db.Database;
 import pl.coderstrust.invoices.exception.DatabaseException;
@@ -33,7 +32,7 @@ public class InvoiceBook {
     return database.updateInvoice(invoice);
   }
 
-  public List<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
+  public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 
