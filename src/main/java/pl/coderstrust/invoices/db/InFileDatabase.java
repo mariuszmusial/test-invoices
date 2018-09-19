@@ -52,7 +52,8 @@ public class InFileDatabase implements Database {
   //testy:
   // 1. Zadne, bo to jest metoda prywatna
   private Long getAndIncrementId() throws FileNotFoundException {
-    Long id = Long.valueOf(FileHelper.readLinesFromFile(idFile).get(0));
+    List<String> lines = FileHelper.readLinesFromFile(idFile);
+    Long id = lines.isEmpty() ? -1L : Long.valueOf(lines.get(0));
     id++;
     FileHelper.writeLineToFile(idFile, String.valueOf(id), true);
     return id;
