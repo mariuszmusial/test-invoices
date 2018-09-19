@@ -11,13 +11,14 @@ public interface Database {
 
   Long saveInvoice(Invoice invoice) throws DatabaseException;
 
-  Collection<Invoice> getInvoices();
+  Collection<Invoice> getInvoices() throws DatabaseException;
 
-  Optional<Invoice> getInvoiceById(Long id);
+  Optional<Invoice> getInvoiceById(Long id) throws DatabaseException;
 
-  int updateInvoice(Invoice invoice) throws DatabaseException;
+  void updateInvoice(Invoice invoice) throws DatabaseException;
 
-  Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate);
+  Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
+      throws DatabaseException;
 
   void deleteInvoice(Long id) throws DatabaseException, IOException;
 }
