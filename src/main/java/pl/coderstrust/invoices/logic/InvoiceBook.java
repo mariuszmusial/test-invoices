@@ -32,11 +32,12 @@ public class InvoiceBook {
     return database.getInvoiceById(id);
   }
 
-  public int updateInvoice(Invoice invoice) throws DatabaseException {
-    return database.updateInvoice(invoice);
+  public void updateInvoice(Invoice invoice) throws DatabaseException {
+    database.updateInvoice(invoice);
   }
 
-  public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
+  public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
+      throws DatabaseException {
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 
