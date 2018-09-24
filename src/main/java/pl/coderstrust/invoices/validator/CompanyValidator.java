@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+import org.springframework.stereotype.Service;
 import pl.coderstrust.invoices.model.Company;
 
+@Service
 public class CompanyValidator implements Validator<Company> {
 
   private static final String EXPECTED_NOT_EMPTY_CITY = "Expected not empty city";
@@ -38,8 +40,8 @@ public class CompanyValidator implements Validator<Company> {
     if (company.getName() == null || company.getName().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_NAME);
     }
-    if (company.getTaxIdentificationNumber() == null ||
-        company.getTaxIdentificationNumber().isEmpty()) {
+    if (company.getTaxIdentificationNumber() == null
+        || company.getTaxIdentificationNumber().isEmpty()) {
       validationExceptions.add(EXPECTED_NOT_EMPTY_TAX_IDENTIFICATION_NUMBER);
     } else {
       if (!taxIdPattern.matcher(company.getTaxIdentificationNumber()).matches()) {

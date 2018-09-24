@@ -7,9 +7,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import org.springframework.stereotype.Repository;
 import pl.coderstrust.invoices.db.Database;
 import pl.coderstrust.invoices.model.Invoice;
 
+@Repository
 public class InMemoryDatabase implements Database {
 
   private final Map<Long, Invoice> invoices = new HashMap<>();

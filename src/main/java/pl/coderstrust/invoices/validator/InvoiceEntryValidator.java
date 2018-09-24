@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import pl.coderstrust.invoices.model.InvoiceEntry;
 
+@Service
 public class InvoiceEntryValidator implements Validator<InvoiceEntry> {
 
   private static final String EXPECTED_CORRECT_AMOUNT = "Expected correct amount (1 or more)";
