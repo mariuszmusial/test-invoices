@@ -1,6 +1,5 @@
 package pl.coderstrust.invoices.db;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
@@ -20,5 +19,5 @@ public interface Database {
   Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
       throws DatabaseException;
 
-  void deleteInvoice(Long id) throws DatabaseException, IOException;
+  void deleteInvoice(Long id) throws DatabaseException;
 }
