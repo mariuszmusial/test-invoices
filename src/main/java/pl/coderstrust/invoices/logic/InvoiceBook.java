@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.coderstrust.invoices.db.Database;
 import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.model.Invoice;
 
+@Service
 public class InvoiceBook {
 
   private Database database;
 
+  @Autowired
   public InvoiceBook(Database database) {
     this.database = database;
   }
