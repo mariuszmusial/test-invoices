@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 import org.springframework.stereotype.Repository;
 import pl.coderstrust.invoices.db.Database;
+import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.model.Invoice;
 
 @Repository
@@ -27,13 +28,12 @@ public class InMemoryDatabase implements Database {
   }
 
   @Override
-  public int updateInvoice(Invoice invoice) {
+  public void updateInvoice(Invoice invoice) throws DatabaseException {
     if (!invoices.containsKey(invoice.getId())) {
-      throw new IllegalArgumentException(
+      throw new DatabaseException(
           WRONG_ID_MESSAGE + invoice.getId());
     }
     invoices.put(invoice.getId(), invoice);
-    return 1;
   }
 
   @Override
