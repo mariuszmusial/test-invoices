@@ -10,16 +10,22 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.coderstrust.invoices.db.util.InvoiceUtil;
 import pl.coderstrust.invoices.exception.DatabaseException;
+import pl.coderstrust.invoices.exception.InvoiceNotFoundException;
 import pl.coderstrust.invoices.helper.FileHelper;
 import pl.coderstrust.invoices.helper.InvoiceJsonMapper;
 import pl.coderstrust.invoices.model.Invoice;
 
 public class InFileDatabase implements Database {
 
+  private static final Logger logger = LoggerFactory.getLogger(InFileDatabase.class);
+
   private File databaseFile;
   private File idFile;
+  private int id;
 
   public InFileDatabase(String filePath, String idFilePath) throws DatabaseException {
     this.databaseFile = new File(filePath);
@@ -34,6 +40,7 @@ public class InFileDatabase implements Database {
 
   @Override
   public Long saveInvoice(Invoice invoice) throws DatabaseException {
+    logger.info("Saving invoice {} to file {}.", invoice);
     long newId;
     try {
       String invoiceJson = InvoiceJsonMapper.toJson(invoice);
@@ -71,6 +78,8 @@ public class InFileDatabase implements Database {
 
   @Override
   public void updateInvoice(Invoice invoice) throws DatabaseException, NullPointerException {
+    logger.info("Updating invoice {} in file {}.", invoice);
+    ifInvoiceNotFoundThrowException(invoice.getId());
     Optional<Invoice> currentInvoice = getInvoiceById(invoice.getId());
     if (!currentInvoice.isPresent()) {
       throw new DatabaseException("Invoice with ID " + invoice.getId()
@@ -103,6 +112,8 @@ public class InFileDatabase implements Database {
 
   @Override
   public void deleteInvoice(Long id) throws DatabaseException {
+    logger.info("Deleting invoice with id {} from file {}.", id);
+    ifInvoiceNotFoundThrowException(id);
     List<Invoice> invoices = getInvoices().stream().filter(inv -> !inv.getId()
         .equals(id)).collect(Collectors.toList());
     List<String> invoicesAsJson = mapInvoicesToJsons(invoices);
@@ -130,6 +141,13 @@ public class InFileDatabase implements Database {
       return Optional.of(InvoiceJsonMapper.fromJson(foundInvoices.get(0)));
     } catch (IOException exception) {
       throw new DatabaseException(exception);
+    }
+  }
+
+  private void ifInvoiceNotFoundThrowException(Long id) throws DatabaseException {
+    if (!getInvoiceById(id).isPresent()) {
+      logger.info("Invoice with id {} not found.", id);
+      throw new InvoiceNotFoundException("Invoice not in database.");
     }
   }
 }

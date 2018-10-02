@@ -1,9 +1,10 @@
 package pl.coderstrust.invoices.logic;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderstrust.invoices.db.Database;
@@ -14,6 +15,7 @@ import pl.coderstrust.invoices.model.Invoice;
 public class InvoiceBook {
 
   private Database database;
+  private static final Logger logger = LoggerFactory.getLogger(InvoiceBook.class);
 
   @Autowired
   public InvoiceBook(Database database) {
@@ -21,6 +23,9 @@ public class InvoiceBook {
   }
 
   public Long saveInvoice(Invoice invoice) throws DatabaseException {
+
+    logger.debug("Saving invoice with ID " + invoice.getId());
+
     return database.saveInvoice(invoice);
   }
 
@@ -28,7 +33,7 @@ public class InvoiceBook {
     return database.getInvoices();
   }
 
-  public Optional<Invoice> getInvoiceById(Long id) throws DatabaseException, IOException {
+  public Optional<Invoice> getInvoiceById(Long id) throws DatabaseException {
     return database.getInvoiceById(id);
   }
 
@@ -41,7 +46,7 @@ public class InvoiceBook {
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 
-  public void deleteInvoice(Long id) throws DatabaseException, IOException {
+  public void deleteInvoice(Long id) throws DatabaseException {
     database.deleteInvoice(id);
   }
 }
