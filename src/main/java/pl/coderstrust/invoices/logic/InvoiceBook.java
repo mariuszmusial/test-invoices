@@ -30,23 +30,38 @@ public class InvoiceBook {
   }
 
   public Collection<Invoice> getInvoices() throws DatabaseException {
+
+    logger.debug("Invoice {} not found.");
+
     return database.getInvoices();
   }
 
   public Optional<Invoice> getInvoiceById(Long id) throws DatabaseException {
+
+    logger.debug("Invoice with id {} not found.", id);
+
     return database.getInvoiceById(id);
   }
 
   public void updateInvoice(Invoice invoice) throws DatabaseException {
+
+    logger.debug("Incorrect data provided while updating invoice.");
+
     database.updateInvoice(invoice);
   }
 
   public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
       throws DatabaseException {
+
+    logger.debug("Incorrect dates provided.");
+
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 
   public void deleteInvoice(Long id) throws DatabaseException {
+
+    logger.debug("Invoice with id {} not found.", id);
+
     database.deleteInvoice(id);
   }
 }

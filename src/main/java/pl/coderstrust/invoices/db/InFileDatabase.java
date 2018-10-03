@@ -25,7 +25,6 @@ public class InFileDatabase implements Database {
 
   private File databaseFile;
   private File idFile;
-  private int id;
 
   public InFileDatabase(String filePath, String idFilePath) throws DatabaseException {
     this.databaseFile = new File(filePath);

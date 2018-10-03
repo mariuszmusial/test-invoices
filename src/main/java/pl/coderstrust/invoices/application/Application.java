@@ -14,13 +14,5 @@ public class Application {
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
-
-    try {
-      throw new NullPointerException();
-    } catch (NullPointerException ex) {
-      logger.info("Catched Null pointer exception when it was thrown");
-      throw new RuntimeException();
-    }
   }
 }
-

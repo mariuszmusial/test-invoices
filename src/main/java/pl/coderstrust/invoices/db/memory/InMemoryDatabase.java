@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import pl.coderstrust.invoices.db.Database;
 import pl.coderstrust.invoices.exception.DatabaseException;
-import pl.coderstrust.invoices.exception.InvoiceNotFoundException;
 import pl.coderstrust.invoices.model.Invoice;
 
 @Repository
@@ -42,18 +41,17 @@ public class InMemoryDatabase implements Database {
   @Override
   public void updateInvoice(Invoice invoice) throws DatabaseException {
     if (!invoices.containsKey(invoice.getId())) {
-      logger.error("Invoice {} not found.", invoice);
-      throw new InvoiceNotFoundException("Invoice not in database.");
+      throw new DatabaseException(
+          WRONG_ID_MESSAGE + invoice.getId());
     }
     invoices.put(invoice.getId(), invoice);
   }
 
   @Override
-  public void deleteInvoice(Long id) throws InvoiceNotFoundException {
-    if (getInvoices().stream()
-        .noneMatch(inv -> inv.getId().equals(id))) {
+  public void deleteInvoice(Long id) {
+    invoices.remove(id);
+    {
       logger.error("Invoice with id {} not found.", id);
-      throw new InvoiceNotFoundException("Invoice not in database.");
     }
     invoiceList.remove(getInvoiceById(id));
   }
