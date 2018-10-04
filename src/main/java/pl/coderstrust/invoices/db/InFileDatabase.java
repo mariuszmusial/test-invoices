@@ -78,7 +78,7 @@ public class InFileDatabase implements Database {
   @Override
   public void updateInvoice(Invoice invoice) throws DatabaseException, NullPointerException {
     logger.info("Updating invoice {} in file {}.", invoice);
-    ifInvoiceNotFoundThrowException(invoice.getId());
+    throwExceptionIfInvoiceNotFound(invoice.getId());
     Optional<Invoice> currentInvoice = getInvoiceById(invoice.getId());
     if (!currentInvoice.isPresent()) {
       throw new DatabaseException("Invoice with ID " + invoice.getId()
@@ -112,7 +112,7 @@ public class InFileDatabase implements Database {
   @Override
   public void deleteInvoice(Long id) throws DatabaseException {
     logger.info("Deleting invoice with id {} from file {}.", id);
-    ifInvoiceNotFoundThrowException(id);
+    throwExceptionIfInvoiceNotFound(id);
     List<Invoice> invoices = getInvoices().stream().filter(inv -> !inv.getId()
         .equals(id)).collect(Collectors.toList());
     List<String> invoicesAsJson = mapInvoicesToJsons(invoices);
@@ -143,9 +143,8 @@ public class InFileDatabase implements Database {
     }
   }
 
-  private void ifInvoiceNotFoundThrowException(Long id) throws DatabaseException {
+  private void throwExceptionIfInvoiceNotFound(Long id) throws DatabaseException {
     if (!getInvoiceById(id).isPresent()) {
-      logger.info("Invoice with id {} not found.", id);
       throw new InvoiceNotFoundException("Invoice not in database.");
     }
   }

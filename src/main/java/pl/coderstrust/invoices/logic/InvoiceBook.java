@@ -31,14 +31,14 @@ public class InvoiceBook {
 
   public Collection<Invoice> getInvoices() throws DatabaseException {
 
-    logger.debug("Invoice {} not found.");
+    logger.debug("Getting invoices {}.");
 
     return database.getInvoices();
   }
 
   public Optional<Invoice> getInvoiceById(Long id) throws DatabaseException {
 
-    logger.debug("Invoice with id {} not found.", id);
+    logger.debug("Trying to get invoice by id {}.", id);
 
     return database.getInvoiceById(id);
   }
