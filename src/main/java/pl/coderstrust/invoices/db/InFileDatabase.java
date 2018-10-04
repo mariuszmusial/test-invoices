@@ -111,7 +111,7 @@ public class InFileDatabase implements Database {
 
   @Override
   public void deleteInvoice(Long id) throws DatabaseException {
-    logger.info("Deleting invoice with id {} from file {}.", id);
+    logger.info("Deleting invoice with id {} from file.", id);
     throwExceptionIfInvoiceNotFound(id);
     List<Invoice> invoices = getInvoices().stream().filter(inv -> !inv.getId()
         .equals(id)).collect(Collectors.toList());

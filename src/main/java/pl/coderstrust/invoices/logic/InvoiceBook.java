@@ -31,7 +31,7 @@ public class InvoiceBook {
 
   public Collection<Invoice> getInvoices() throws DatabaseException {
 
-    logger.debug("Getting invoices {}.");
+    logger.debug("Getting invoices.");
 
     return database.getInvoices();
   }
