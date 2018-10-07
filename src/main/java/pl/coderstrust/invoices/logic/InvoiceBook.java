@@ -24,7 +24,7 @@ public class InvoiceBook {
 
   public Long saveInvoice(Invoice invoice) throws DatabaseException {
 
-    logger.debug("Saving invoice with ID " + invoice.getId());
+    logger.debug("Saving invoice with identifier {}.", invoice.getIdentifier());
 
     return database.saveInvoice(invoice);
   }
@@ -60,7 +60,7 @@ public class InvoiceBook {
 
   public void deleteInvoice(Long id) throws DatabaseException {
 
-    logger.debug("Deleting invoice with ID {}.",id);
+    logger.debug("Deleting invoice with ID {}.", id);
 
     database.deleteInvoice(id);
   }

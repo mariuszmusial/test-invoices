@@ -90,7 +90,7 @@ public class InMemoryDatabase implements Database {
         }
       }
     }
-    logger.info("Found {} invoices.",result.size());
+    logger.info("Found {} invoices.", result.size());
     return result;
   }
 

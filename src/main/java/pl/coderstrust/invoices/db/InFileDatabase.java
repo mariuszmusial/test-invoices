@@ -50,7 +50,7 @@ public class InFileDatabase implements Database {
     } catch (Exception exception) {
       throw new DatabaseException(exception);
     }
-    logger.info("Saved invoice with id {}.",newId);
+    logger.info("Saved invoice with id {}.", newId);
     return newId;
   }
 
