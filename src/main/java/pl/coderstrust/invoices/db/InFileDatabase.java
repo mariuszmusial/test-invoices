@@ -29,7 +29,9 @@ public class InFileDatabase implements Database {
   public InFileDatabase(String filePath, String idFilePath) throws DatabaseException {
     this.databaseFile = new File(filePath);
     if (!databaseFile.exists() || !databaseFile.isFile()) {
-      throw new DatabaseException("Database file does not exist! Path: " + filePath);
+      String message = "Database file does not exist! Path: " + filePath;
+      logger.error(message);
+      throw new DatabaseException(message);
     }
     this.idFile = new File(idFilePath);
     if (!idFile.exists() || !idFile.isFile()) {
@@ -39,7 +41,7 @@ public class InFileDatabase implements Database {
 
   @Override
   public Long saveInvoice(Invoice invoice) throws DatabaseException {
-    logger.info("Saving invoice {} to file {}.", invoice);
+    logger.info("Saving invoice {} to file.", invoice);
     long newId;
     try {
       String invoiceJson = InvoiceJsonMapper.toJson(invoice);
@@ -48,6 +50,7 @@ public class InFileDatabase implements Database {
     } catch (Exception exception) {
       throw new DatabaseException(exception);
     }
+    logger.info("Saved invoice with id {}.",newId);
     return newId;
   }
 
@@ -77,7 +80,7 @@ public class InFileDatabase implements Database {
 
   @Override
   public void updateInvoice(Invoice invoice) throws DatabaseException, NullPointerException {
-    logger.info("Updating invoice {} in file {}.", invoice);
+    logger.info("Updating invoice {} in file.", invoice);
     throwExceptionIfInvoiceNotFound(invoice.getId());
     Optional<Invoice> currentInvoice = getInvoiceById(invoice.getId());
     if (!currentInvoice.isPresent()) {

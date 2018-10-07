@@ -45,7 +45,7 @@ public class InvoiceBook {
 
   public void updateInvoice(Invoice invoice) throws DatabaseException {
 
-    logger.debug("Incorrect data provided while updating invoice.");
+    logger.debug("Saving invoice with ID " + invoice.getId());
 
     database.updateInvoice(invoice);
   }
@@ -53,14 +53,14 @@ public class InvoiceBook {
   public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
       throws DatabaseException {
 
-    logger.debug("Incorrect dates provided.");
+    logger.info("Trying to find invoices between {} and {}.", startDate, endDate);
 
     return database.findInvoicesByDateRange(startDate, endDate);
   }
 
   public void deleteInvoice(Long id) throws DatabaseException {
 
-    logger.debug("Invoice with id {} not found.", id);
+    logger.debug("Deleting invoice with ID {}.",id);
 
     database.deleteInvoice(id);
   }
