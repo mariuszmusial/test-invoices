@@ -12,13 +12,13 @@ import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.model.Invoice;
 
 @Service
-public class InvoiceBook {
+public class InvoiceService {
 
   private Database database;
   private static final Logger logger = LoggerFactory.getLogger(InvoiceBook.class);
 
   @Autowired
-  public InvoiceBook(Database database) {
+  public InvoiceService(Database database) {
     this.database = database;
   }
 
