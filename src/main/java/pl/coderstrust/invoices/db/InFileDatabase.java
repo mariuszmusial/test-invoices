@@ -35,7 +35,9 @@ public class InFileDatabase implements Database {
     }
     this.idFile = new File(idFilePath);
     if (!idFile.exists() || !idFile.isFile()) {
-      throw new DatabaseException("ID file does not exist! Path: " + idFilePath);
+      String message = "ID file does not exist! Path: " + idFilePath;
+      logger.error(message);
+      throw new DatabaseException(message);
     }
   }
 
@@ -64,6 +66,7 @@ public class InFileDatabase implements Database {
 
   @Override
   public List<Invoice> getInvoices() throws DatabaseException {
+    logger.info("Get invoice {} to file.");
     List<String> lines;
     List<Invoice> result = new ArrayList<>();
     try {
@@ -75,6 +78,7 @@ public class InFileDatabase implements Database {
     } catch (Exception exception) {
       throw new DatabaseException(exception);
     }
+    logger.info("Get invoice with id {}.");
     return result;
   }
 
@@ -84,14 +88,17 @@ public class InFileDatabase implements Database {
     throwExceptionIfInvoiceNotFound(invoice.getId());
     Optional<Invoice> currentInvoice = getInvoiceById(invoice.getId());
     if (!currentInvoice.isPresent()) {
-      throw new DatabaseException("Invoice with ID " + invoice.getId()
-          + " that you are trying to update does not exist in the database.");
+      String message = "Invoice with ID " + invoice.getId()
+          + " that you are trying to update does not exist in the database.";
+      logger.error(message);
+      throw new DatabaseException(message);
     }
     List<Invoice> invoicesAfterUpdate = getInvoices().stream().filter(inv -> !inv.getId()
         .equals(invoice.getId())).collect(Collectors.toList());
     invoicesAfterUpdate.add(invoice);
     List<String> invoicesAsJson = mapInvoicesToJsons(invoicesAfterUpdate);
     FileHelper.writeLinesToFile(databaseFile, invoicesAsJson);
+    logger.info("Update invoice with id {}", invoice);
   }
 
   private List<String> mapInvoicesToJsons(List<Invoice> invoicesAfterUpdate)
@@ -109,6 +116,7 @@ public class InFileDatabase implements Database {
 
   public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
       throws DatabaseException {
+    logger.info("Find invoice between {} and {}. ", startDate, endDate);
     return InvoiceUtil.getInvoicesByDateRange(startDate, endDate, getInvoices());
   }
 
@@ -134,7 +142,9 @@ public class InFileDatabase implements Database {
         .filter(line -> line.startsWith("{\"id\":" + id + ","))
         .collect(Collectors.toList());
     if (foundInvoices.size() > 1) {
-      throw new DatabaseException("Found more than one invoice with given ID.");
+      String message = "Found more than one invoice with given ID.";
+      logger.error(message);
+      throw new DatabaseException(message);
     }
     if (foundInvoices.size() == 0) {
       return Optional.empty();
@@ -148,7 +158,9 @@ public class InFileDatabase implements Database {
 
   private void throwExceptionIfInvoiceNotFound(Long id) throws DatabaseException {
     if (!getInvoiceById(id).isPresent()) {
-      throw new InvoiceNotFoundException("Invoice not in database.");
+      String message = "Invoice not in database.";
+      logger.error(message);
+      throw new InvoiceNotFoundException(message);
     }
   }
 }
