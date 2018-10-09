@@ -15,7 +15,7 @@ import pl.coderstrust.invoices.model.Invoice;
 public class InvoiceService {
 
   private Database database;
-  private static final Logger logger = LoggerFactory.getLogger(InvoiceBook.class);
+  private static final Logger logger = LoggerFactory.getLogger(InvoiceService.class);
 
   @Autowired
   public InvoiceService(Database database) {

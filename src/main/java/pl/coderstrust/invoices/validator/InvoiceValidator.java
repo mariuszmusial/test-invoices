@@ -3,10 +3,13 @@ package pl.coderstrust.invoices.validator;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.coderstrust.invoices.model.Company;
 import pl.coderstrust.invoices.model.Invoice;
 import pl.coderstrust.invoices.model.InvoiceEntry;
 
+@Service
 public class InvoiceValidator {
 
   private final Validator<InvoiceEntry> invoiceEntryValidator;
@@ -21,6 +24,7 @@ public class InvoiceValidator {
   private static final String EXP_NOT_EMPTY_INV_IDENTIFIER = "Expected not empty invoice "
       + "identifier";
 
+  @Autowired
   public InvoiceValidator(Validator<InvoiceEntry> invoiceEntryValidator,
       Validator<Company> companyValidator) {
     this.invoiceEntryValidator = invoiceEntryValidator;

@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.logic.InvoiceService;
 import pl.coderstrust.invoices.model.Invoice;
-import pl.coderstrust.invoices.validator.Validator;
+import pl.coderstrust.invoices.validator.InvoiceValidator;
 
 
 @RestController
 @RequestMapping("/invoices")
 public class InvoicesController {
 
-  private Validator<Invoice> invoiceValidator;
+  private InvoiceValidator invoiceValidator;
 
   private InvoiceService invoiceService;
 
@@ -32,46 +35,45 @@ public class InvoicesController {
     this.invoiceService = invoiceService;
   }
 
-  @PostMapping("/add")
-  public Long saveInvoice(@RequestBody Invoice invoice) throws DatabaseException {
-    return invoiceService.saveInvoice(invoice);
-  }
-
   @Autowired
   public void setInvoiceValidator(
-      Validator<Invoice> invoiceValidator) {
+      InvoiceValidator invoiceValidator) {
     this.invoiceValidator = invoiceValidator;
   }
 
-//  @PostMapping("/add")
-//  public Long saveInvoice(@RequestBody Invoice invoice) throws DatabaseException {
-//    Collection<String> validateMessages = invoiceValidator.validate(invoice);
-//    if (validateMessages.isEmpty()) {
-//      return invoiceService.saveInvoice(invoice);
-//    } else {
-//
-//    }
-//    return validateMessages
-//    // jesli validator zwrocil bledy, to je wywal w tym momencie, czyli przeczytaj jak to powinno byc zrobione :)
-//  }
+  @PostMapping("/add")
+  public ResponseEntity<?> saveInvoice(@RequestBody Invoice invoice) throws DatabaseException {
+    Collection<String> validateMessages = invoiceValidator.validateInvoiceForSave(invoice);
+    if (validateMessages.isEmpty()) {
+      return ResponseEntity.ok(invoiceService.saveInvoice(invoice));
+    } else {
+      return ResponseEntity.badRequest().body(validateMessages);
+    }
+  }
 
   @GetMapping
-  public Collection<Invoice> getAllInvoices() {
+  public Collection<Invoice> getAllInvoices() throws DatabaseException {
     return invoiceService.getInvoices();
   }
 
   @GetMapping("/{id}")
-  public Optional<Invoice> getInvoiceById(@PathVariable(name = "id") Long id) {
+  public Optional<Invoice> getInvoiceById(@PathVariable(name = "id") Long id)
+      throws DatabaseException {
+    // jesli znajdziesz to zwroc ResponseEntity.ok
+    // jesli nie znajdziesz to zwroc RepsonseEntity.notFound().build()
     return invoiceService.getInvoiceById(id);
   }
 
   @PutMapping("/{id}")
-  public int updateInvoice(@PathVariable(name = "id") Invoice invoice) throws DatabaseException {
-    return invoiceService.updateInvoice(invoice);
+  public void updateInvoice(@PathVariable(name = "id") Invoice invoice) throws DatabaseException {
+    invoiceService.updateInvoice(invoice);
   }
 
   @GetMapping("/{dateFrom}/{dateTo}")
-  public Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
+  public Collection<Invoice> findInvoicesByDateRange(
+      @PathVariable("dateFrom") @DateTimeFormat(iso = ISO.DATE) LocalDate startDate,
+      @PathVariable("dateTo") @DateTimeFormat(iso = ISO.DATE) LocalDate endDate)
+      throws DatabaseException {
     return invoiceService.findInvoicesByDateRange(startDate, endDate);
   }
 
@@ -80,6 +82,3 @@ public class InvoicesController {
     invoiceService.deleteInvoice(id);
   }
 }
-
-// jesli jest ok to zapisuje to przez uzycie invoiceService to zwracam ResponseEntity.ok
-// jest walidator zwroci jakies bledy to zwracam ResponseEntity.badRequest()
