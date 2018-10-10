@@ -28,11 +28,11 @@ public class InMemoryDatabase implements Database {
 
   @Override
   public Long saveInvoice(Invoice invoice) {
-    logger.info("Trying to save invoice with id {}", invoice.getId());
+    logger.info("Trying to save invoice with identifier {}", invoice.getIdentifier());
     invoices
         .put(++id, new Invoice(id, invoice.getIdentifier(), invoice.getIssuedDate(),
             invoice.getBuyer(), invoice.getSeller(), invoice.getEntries()));
-    logger.info("Invoice with id {} saved.", invoice.getId());
+    logger.info("Invoice with id {} saved.", id);
     return id;
   }
 

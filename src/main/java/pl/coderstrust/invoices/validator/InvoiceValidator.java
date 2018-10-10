@@ -62,9 +62,8 @@ public class InvoiceValidator {
       }
     }
 
-    if (invoice.getIdentifier() == null) {
-      validationExceptions.add(
-          EXP_NOT_EMPTY_INV_IDENTIFIER);
+    if (invoice.getIdentifier() == null || invoice.getIdentifier().trim().length() == 0) {
+      validationExceptions.add(EXP_NOT_EMPTY_INV_IDENTIFIER);
     }
     if (invoice.getEntries() == null) {
       validationExceptions.add("Expected not empty invoice entries");
