@@ -14,7 +14,7 @@ public interface Database {
 
   Optional<Invoice> getInvoiceById(Long id) throws DatabaseException;
 
-  void updateInvoice(Invoice invoice) throws DatabaseException;
+  Long updateInvoice(Invoice invoice) throws DatabaseException;
 
   Collection<Invoice> findInvoicesByDateRange(LocalDate startDate, LocalDate endDate)
       throws DatabaseException;

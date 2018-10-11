@@ -9,12 +9,10 @@ import java.util.Optional;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 import pl.coderstrust.invoices.db.Database;
 import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.model.Invoice;
 
-@Repository
 public class InMemoryDatabase implements Database {
 
   private static final Logger logger = LoggerFactory.getLogger(InMemoryDatabase.class);
@@ -37,7 +35,7 @@ public class InMemoryDatabase implements Database {
   }
 
   @Override
-  public void updateInvoice(Invoice invoice) throws DatabaseException {
+  public Long updateInvoice(Invoice invoice) throws DatabaseException {
     logger.info("Trying to update invoice with id {}", invoice.getId());
     if (!invoices.containsKey(invoice.getId())) {
       String message = WRONG_ID_MESSAGE + invoice.getId();
@@ -46,6 +44,7 @@ public class InMemoryDatabase implements Database {
     }
     invoices.put(invoice.getId(), invoice);
     logger.info("Invoice with id {} updated.", invoice.getId());
+    return null;
   }
 
   @Override

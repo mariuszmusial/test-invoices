@@ -83,7 +83,7 @@ public class InFileDatabase implements Database {
   }
 
   @Override
-  public void updateInvoice(Invoice invoice) throws DatabaseException, NullPointerException {
+  public Long updateInvoice(Invoice invoice) throws DatabaseException, NullPointerException {
     logger.info("Updating invoice {} in file.", invoice);
     throwExceptionIfInvoiceNotFound(invoice.getId());
     Optional<Invoice> currentInvoice = getInvoiceById(invoice.getId());
@@ -99,6 +99,7 @@ public class InFileDatabase implements Database {
     List<String> invoicesAsJson = mapInvoicesToJsons(invoicesAfterUpdate);
     FileHelper.writeLinesToFile(databaseFile, invoicesAsJson);
     logger.info("Update invoice with id {}", invoice);
+    return null;
   }
 
   private List<String> mapInvoicesToJsons(List<Invoice> invoicesAfterUpdate)
