@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,7 @@ public class HibernateDatabase implements Database {
     this.invoiceRepository = invoiceRepository;
   }
 
+  @Transactional(rollbackOn = DatabaseException.class)
   @Override
   public Long saveInvoice(Invoice invoice) {
     logger.info("Saving invoice {} to Db.", invoice);
@@ -39,9 +41,11 @@ public class HibernateDatabase implements Database {
 
   @Override
   public Optional<Invoice> getInvoiceById(Long id) {
-    return Optional.empty();
+    logger.info("Updating invoice {} in file.", id);
+    return invoiceRepository.findById(id);
   }
 
+  @Transactional(rollbackOn = DatabaseException.class)
   @Override
   public Long updateInvoice(Invoice invoice) throws DatabaseException {
     logger.info("Updating invoice {} in Database.", invoice);
@@ -58,13 +62,12 @@ public class HibernateDatabase implements Database {
     return InvoiceUtil.getInvoicesByDateRange(startDate, endDate, getInvoices());
   }
 
+  @Transactional(rollbackOn = DatabaseException.class)
   @Override
   public void deleteInvoice(Long id) throws DatabaseException {
     logger.info("Deleting invoice with id {} from Database.", id);
-    throwExceptionIfInvoiceNotFound(id);
 
     invoiceRepository.deleteById(id);
-
   }
 
   private void throwExceptionIfInvoiceNotFound(Long id) throws DatabaseException {
