@@ -47,13 +47,11 @@ public class HibernateDatabase implements Database {
 
   @Transactional(rollbackOn = DatabaseException.class)
   @Override
-  public Long updateInvoice(Invoice invoice) throws DatabaseException {
+  public void updateInvoice(Invoice invoice) throws DatabaseException {
     logger.info("Updating invoice {} in Database.", invoice);
     throwExceptionIfInvoiceNotFound(invoice.getId());
 
     invoiceRepository.save(invoice).getId();
-    return invoice.getId();
-
   }
 
   @Override

@@ -21,8 +21,8 @@ public class InMemoryDatabase implements Database {
   private long id = 0;
   private static final String WRONG_ID_MESSAGE = "The invoice with given ID does not exist: ";
 
-  public InMemoryDatabase() {
-  }
+  // public InMemoryDatabase() {
+  //}
 
   @Override
   public Long saveInvoice(Invoice invoice) {
@@ -35,7 +35,7 @@ public class InMemoryDatabase implements Database {
   }
 
   @Override
-  public Long updateInvoice(Invoice invoice) throws DatabaseException {
+  public void updateInvoice(Invoice invoice) throws DatabaseException {
     logger.info("Trying to update invoice with id {}", invoice.getId());
     if (!invoices.containsKey(invoice.getId())) {
       String message = WRONG_ID_MESSAGE + invoice.getId();
@@ -44,7 +44,6 @@ public class InMemoryDatabase implements Database {
     }
     invoices.put(invoice.getId(), invoice);
     logger.info("Invoice with id {} updated.", invoice.getId());
-    return null;
   }
 
   @Override
