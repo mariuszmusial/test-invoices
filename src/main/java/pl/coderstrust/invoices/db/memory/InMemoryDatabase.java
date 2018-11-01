@@ -9,12 +9,10 @@ import java.util.Optional;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 import pl.coderstrust.invoices.db.Database;
 import pl.coderstrust.invoices.exception.DatabaseException;
 import pl.coderstrust.invoices.model.Invoice;
 
-@Repository
 public class InMemoryDatabase implements Database {
 
   private static final Logger logger = LoggerFactory.getLogger(InMemoryDatabase.class);
@@ -23,8 +21,8 @@ public class InMemoryDatabase implements Database {
   private long id = 0;
   private static final String WRONG_ID_MESSAGE = "The invoice with given ID does not exist: ";
 
-  public InMemoryDatabase() {
-  }
+  // public InMemoryDatabase() {
+  //}
 
   @Override
   public Long saveInvoice(Invoice invoice) {

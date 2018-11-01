@@ -3,15 +3,33 @@ package pl.coderstrust.invoices.model;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+@Entity
+@EntityScan
 public class Invoice {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String identifier;
   private LocalDate issuedDate;
+
+  @ManyToOne(cascade = CascadeType.ALL)
   private Company seller;
+
+  @ManyToOne(cascade = CascadeType.ALL)
   private Company buyer;
+
+  @ManyToMany(cascade = CascadeType.ALL)
   private List<InvoiceEntry> entries;
 
   public Invoice() {
